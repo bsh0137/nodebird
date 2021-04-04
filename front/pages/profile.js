@@ -1,7 +1,9 @@
 import React from 'react';
 
+import AppLayout from '../components/AppLayout'
+
 const Profile = () => {
-    return <div>내 프로필</div>
+    return <AppLayout>내 프로필</AppLayout>
 };
 
 export default Profile;
