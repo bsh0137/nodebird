@@ -1,9 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
+import styled from 'styled-components'
 
+const ButtonWrapper = styled.div`
+    margin-top: 10px;
+`;
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     
@@ -15,8 +19,12 @@ const LoginForm = () => {
         setPassword(e.target.value);
     }, []);
 
+    const onSubmitForm = useCallback(() => {
+        console.log(id, password);
+    }, [id ,password]);
+
     return (
-        <Form>
+        <Form onFinish={onSubmitForm}>
             <div>
                 <label htmlFor="user-id">아이디</label>
                 <br />
@@ -33,10 +41,10 @@ const LoginForm = () => {
                     required
                 />
             </div>
-            <div>
+            <ButtonWrapper>  {/*여기서 style 인라인방식으로 객체로 주면 안됨. 객체로 줄 경우 객체는 모양이 같아도 다른거로 인식하기 때문에 달라진게 없어도 리렌더링 계속 함. */}
                 <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
                 <Link href="/singup"><a><Button>회원가입</Button></a></Link>
-            </div>
+            </ButtonWrapper>
         </Form>
     );
 }
